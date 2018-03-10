@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         System.out.println("----------------------------");
-        System.out.println("Welcome to this typing challenge!");
+        System.out.println("Welcome to the Typing Challenge!");
         System.out.println("Enter your name!");
         System.out.println("----------------------------");
         Scanner reader = new Scanner(System.in);  // Reading from System.in
