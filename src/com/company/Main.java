@@ -4,23 +4,59 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
-        System.out.println("----------------------------");
-        System.out.println("Welcome to the Typing Challenge!");
-        System.out.println("Enter your name!");
-        System.out.println("----------------------------");
+        printGreeting();
         
-//        Scanner reader = new Scanner(System.in);  // Reading from System.in
-//        System.out.println("Enter your Name: ");
-//        String n = reader.nextLine(); // Scans the next token of the input as an String.
-////once finished
-//        System.out.println("Welcome " + n + "!");
+//        capture user name
+        Scanner reader = new Scanner(System.in);  // Reading from System.in
+        String name = reader.nextLine(); // Scans the next token of the input as an String.
+//once finished
+        Player player1 = new Player( name );
+
+        System.out.println();
+        System.out.println("Welcome " + player1.getName() + "!");
+        System.out.println();
+
+        printRules();
 
         while(true) {
+            System.out.println();
+            System.out.println("Press enter to begin!");
+
+//            waiting for any user keypress
+            reader.nextLine();
+
+//              clear the console
+            for (int k = 0; k < 50; k++) {
+                System.out.println();
+            }
+
+            System.out.println("Don't type! Memorize this string for five seconds");
+
             String randomString = getRandomString();
-            System.out.println("Type along!");
             System.out.println(randomString);
 
-            calculateScore(randomString);
+    //        System.out.println("5 seconds to answer!");
+            long start = System.currentTimeMillis();
+    //        end program in 5 seconds
+            long end = start + 5*1000; // 60 seconds * 1000 ms/sec
+
+            int i = 0;
+            while (System.currentTimeMillis() < end) {
+//                System.out.println( "counting seconds" + System.currentTimeMillis());
+//                System.out.println("counting " + i);
+//                i++;
+            }
+
+//            clear the console
+            for (int j = 0; j < 50; j++) {
+                System.out.println();
+            }
+
+            System.out.println("time's up!");
+            System.out.println("give your best guess!");
+
+            calculateScore( randomString, player1 );
+
             char response = playAgain();
 
 //            if player types 'n' then break out of game loop
@@ -34,6 +70,21 @@ public class Main {
 //        String pattern = "(.*)(\\d+)(.*)";
         String randomString = new String("abcdefg");
         return randomString;
+    }
+
+    public static void printGreeting() {
+         System.out.println("----------------------------");
+         System.out.println("Welcome to the Memory Challenge!");
+
+         System.out.println("Enter your name!");
+         System.out.println("----------------------------");
+    }
+
+    public static void printRules() {
+        //            print game rules
+        System.out.println("-------------Rules-------------");
+        System.out.println("You have five seconds to remember the characters below!");
+        System.out.println("Wait until the prompt tells you to type!");
     }
 
     public static char playAgain() {
@@ -60,14 +111,21 @@ public class Main {
         return 'n';
     }
 
-    public static void calculateScore(String randomString) {
+    public static void calculateScore(String randomString, Player player) {
         int score = 0;
         Scanner reader = new Scanner(System.in);
+        
+//
+////        System.out.println("5 seconds to answer!");
+//        long start = System.currentTimeMillis();
+////        end program in 5 seconds
+//        long end = start + 1*1000; // 60 seconds * 1000 ms/sec
+//
+//        while (System.currentTimeMillis() < end) {
+//            System.out.printf( "counting seconds" + System.currentTimeMillis());
+//        }
 
-        System.out.println("5 seconds to answer!");
-        long start = System.currentTimeMillis();
-//        end program in 5 seconds
-        long end = start + 1*1000; // 60 seconds * 1000 ms/sec
+
 //        while (System.currentTimeMillis() < end)
 //        {
             //    increment score for every character that matches userInput
@@ -82,6 +140,9 @@ public class Main {
                     break;
                 }
 
+//                after countdown timer expires, and you read user input
+//                System.out.println("time's up!");
+
 //                character matching and scoring logic
                 if(randomString.charAt( i ) == n) {
                     score++;
@@ -92,16 +153,16 @@ public class Main {
 
 //                closing while loop bracket
 //            }
-        }
+            }
 
-        String finalScore = "--------------" +
-                            " Final Score: " + score +
-                            " --------------";
+           String finalScore = "--------------" +
+                       " Final Score For " + player.getName() + ": " + score +
+                       " --------------";
 
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println(finalScore);
+           System.out.println();
+           System.out.println();
+           System.out.println();
+           System.out.println(finalScore);
 
         // ANSI escape code to update console text color;
 //        System.out.println(("\033[31m Hello\033[0m" + " hiiiiii"));
