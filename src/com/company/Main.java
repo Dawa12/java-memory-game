@@ -54,7 +54,9 @@ public class Main {
 
             System.out.println("Don't type! Memorize this string for five seconds");
 
-            String randomString = getRandomString();
+//            String randomString = getRandomString();
+            String randomString = shuffle("abcdefghijklmnop");
+
             System.out.println(randomString);
 
             long start = System.currentTimeMillis();
@@ -113,6 +115,22 @@ public class Main {
         } else {
             System.out.println("No history of games yet!");
         }
+    }
+
+
+//    randomize string shuffle method copied from: https://stackoverflow.com/a/3316696/4544892
+    public static String shuffle(String input){
+        List<Character> characters = new ArrayList<Character>();
+        for(char c:input.toCharArray()){
+            characters.add(c);
+        }
+        StringBuilder output = new StringBuilder(input.length());
+        while(characters.size()!=0){
+            int randPicker = (int)(Math.random()*characters.size());
+            output.append(characters.remove(randPicker));
+        }
+//        System.out.println(output.toString());
+        return output.toString();
     }
 
     public static void printGreeting() {
