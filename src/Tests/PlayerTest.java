@@ -11,8 +11,4 @@ public class PlayerTest {
 //        check if player entered valid name
         assertTrue(bob.getName().length() > 1);
     }
-
-
-
-
 }

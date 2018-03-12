@@ -7,10 +7,7 @@ public class Main {
     static Hashtable<Integer,Integer> scoreHistory = new Hashtable<Integer, Integer>();
 
     public static void main(String[] args) throws InterruptedException, IOException {
-
-
         printGreeting();
-
 
 //        capture user name
         Scanner reader = new Scanner(System.in);  // Reading from System.in
@@ -42,8 +39,6 @@ public class Main {
                          }
                      }
 
-
-
             printRules();
 
             System.out.println();
@@ -52,7 +47,7 @@ public class Main {
 //            waiting for any user keypress
             reader.nextLine();
 
-//              clear the console
+            // clear the console
             for (int k = 0; k < 50; k++) {
                 System.out.println();
             }
@@ -62,16 +57,13 @@ public class Main {
             String randomString = getRandomString();
             System.out.println(randomString);
 
-    //        System.out.println("5 seconds to answer!");
             long start = System.currentTimeMillis();
     //        end program in 5 seconds
             long end = start + 5*1000; // 60 seconds * 1000 ms/sec
 
             int i = 0;
             while (System.currentTimeMillis() < end) {
-//                System.out.println( "counting seconds" + System.currentTimeMillis());
-//                System.out.println("counting " + i);
-//                i++;
+//                System.out.println(i);
             }
 
 //            clear the console
@@ -95,7 +87,7 @@ public class Main {
 
     public static String getRandomString() {
 //        String pattern = "(.*)(\\d+)(.*)";
-        String randomString = new String("abcdefg");
+        String randomString = new String("caqqwdcaw");
         return randomString;
     }
 
@@ -121,8 +113,6 @@ public class Main {
         } else {
             System.out.println("No history of games yet!");
         }
-
-
     }
 
     public static void printGreeting() {
@@ -167,29 +157,14 @@ public class Main {
     public static void calculateScore(String randomString, Player player) {
         int score = 0;
         Scanner reader = new Scanner(System.in);
-        
-//
-////        System.out.println("5 seconds to answer!");
-//        long start = System.currentTimeMillis();
-////        end program in 5 seconds
-//        long end = start + 1*1000; // 60 seconds * 1000 ms/sec
-//
-//        while (System.currentTimeMillis() < end) {
-//            System.out.printf( "counting seconds" + System.currentTimeMillis());
-//        }
 
-
-//        while (System.currentTimeMillis() < end)
-//        {
             //    increment score for every character that matches userInput
             for (int i = 0; i < randomString.length(); i++) {
                 char n;
                 try {
                     n = reader.findInLine(".").charAt(0);
                 } catch (Exception e){
-//                try to catch OutofBoundsException or NullPointerException if user types too little or too much
-//                    System.out.println("catching exception ");
-//                    System.out.println(e);
+//                    not logging exception since it will interrupt console game
                     break;
                 }
 
@@ -199,17 +174,9 @@ public class Main {
 //                character matching and scoring logic
                 if(randomString.charAt( i ) == n) {
                     score++;
-
-
-
-
-
-
-
-
-                    System.out.println("Correct! New Score: " + score);
+                    System.out.println(randomString.charAt( i ) + " is " + "correct! New Score: " + score);
                 } else {
-                    System.out.println("Wrong! score remains: " + score);
+                    System.out.println(randomString.charAt( i ) + " is " + "Wrong! score remains: " + score);
                 }
 
 //                closing while loop bracket
@@ -225,7 +192,6 @@ public class Main {
            System.out.println();
            System.out.println(finalScore);
 
-
             int size = scoreHistory.size();
 
             if(size > 0) {
@@ -233,8 +199,5 @@ public class Main {
             } else {
                 scoreHistory.put(1, score);
             }
-
-        // ANSI escape code to update console text color;
-//        System.out.println(("\033[31m Hello\033[0m" + " hiiiiii"));
     }
 }
