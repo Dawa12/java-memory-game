@@ -1,11 +1,17 @@
 package com.company;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.*;
 
 public class Main {
+    static Hashtable<Integer,Integer> scoreHistory = new Hashtable<Integer, Integer>();
+
     public static void main(String[] args) throws InterruptedException, IOException {
+
+
         printGreeting();
-        
+
+
 //        capture user name
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         String name = reader.nextLine(); // Scans the next token of the input as an String.
@@ -16,9 +22,30 @@ public class Main {
         System.out.println("Welcome " + player1.getName() + "!");
         System.out.println();
 
-        printRules();
-
         while(true) {
+             //        player enters "play" or "history"
+                     while(true) {
+                         System.out.println("1. Type 'play' to play " +
+                                             " 2. Type 'history' to view your game history");
+
+//                         Scanner reader = new Scanner(System.in);  // Reading from System.in
+                         String startInput = reader.nextLine();
+
+                         if (startInput.equals("history")) {
+                             showHistory();
+                         } else if (startInput.equals("play")) {
+             //                exit loop only if player enters "play"
+                             System.out.println("you entered: " + startInput);
+                             break;
+                         } else {
+                             System.out.println("Invalid input");
+                         }
+                     }
+
+
+
+            printRules();
+
             System.out.println();
             System.out.println("Press enter to begin!");
 
@@ -70,6 +97,32 @@ public class Main {
 //        String pattern = "(.*)(\\d+)(.*)";
         String randomString = new String("abcdefg");
         return randomString;
+    }
+
+    public static void showHistory() {
+        int size = scoreHistory.size();
+
+        if(size > 0) {
+            System.out.println( "showing history" );
+
+            Set<Integer> keys = scoreHistory.keySet();
+
+            //Obtaining iterator over set entries
+            Iterator<Integer> itr = keys.iterator();
+
+            //Displaying Key and value pairs
+            while (itr.hasNext()) {
+                // Getting Key
+
+                int str = itr.next();
+
+                System.out.println( "Game: " + str + ": Final Score: " + scoreHistory.get( str ) );
+            }
+        } else {
+            System.out.println("No history of games yet!");
+        }
+
+
     }
 
     public static void printGreeting() {
@@ -146,6 +199,14 @@ public class Main {
 //                character matching and scoring logic
                 if(randomString.charAt( i ) == n) {
                     score++;
+
+
+
+
+
+
+
+
                     System.out.println("Correct! New Score: " + score);
                 } else {
                     System.out.println("Wrong! score remains: " + score);
@@ -163,6 +224,15 @@ public class Main {
            System.out.println();
            System.out.println();
            System.out.println(finalScore);
+
+
+            int size = scoreHistory.size();
+
+            if(size > 0) {
+                scoreHistory.put(size + 1, score);
+            } else {
+                scoreHistory.put(1, score);
+            }
 
         // ANSI escape code to update console text color;
 //        System.out.println(("\033[31m Hello\033[0m" + " hiiiiii"));
